@@ -214,15 +214,9 @@ def run_game():
     for i in keys:
         print'{0}/t{1}'.format(i,micrograpshdic[i])
     diff = raw_input('Choose difficulty level:')
-    
-    
-    
-    if diff == '1':
-        file = 'micrographs/micrograph00007.mrc'
-    if diff == '2':
-        file = 'micrographs/micrograph00002.mrc'
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
+    file = micrographsd[diff]
     thegame(file)
     #os.system('python picking-demo.py {0}'.format(file))
     os.system('rm micrographs/*_manualpick.star')
