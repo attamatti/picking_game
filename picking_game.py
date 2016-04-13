@@ -2,7 +2,7 @@
 import os
 import sys
 import time
-import grep
+import glob
 global vers
 global relionpath
 relionpath = '/fbs/emsoftware2/LINUX/relion-1.4-beta-1/bin/'
@@ -198,7 +198,7 @@ def run_game():
     check_scores()
     print '\n\nParticle picking demo | for astbury conversation | vers {0}'.format(vers)
 
-    micrographs = grep('micrographs/*.mrc')
+    micrographs = glob('micrographs/*.mrc')
     micrographsdic = {"1":"micrographs/micrograph00007.mrc","2":"micrographs/micrograph00007.mrc"}
     n=3
     for i in micrographs:
