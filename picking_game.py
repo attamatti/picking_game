@@ -198,7 +198,7 @@ def run_game():
     check_scores()
     print '\n\nParticle picking demo | for astbury conversation | vers {0}'.format(vers)
 
-    micrographs = glob('micrographs/*.mrc')
+    micrographs = glob.glob('micrographs/*.mrc')
     micrographsdic = {"1":"micrographs/micrograph00007.mrc","2":"micrographs/micrograph00007.mrc"}
     n=3
     for i in micrographs:
