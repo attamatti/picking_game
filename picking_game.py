@@ -199,7 +199,7 @@ def run_game():
     print '\n\nParticle picking demo | for astbury conversation | vers {0}'.format(vers)
 
     micrographs = glob.glob('micrographs/*.mrc')
-    micrographsdic = {"1":"micrographs/micrograph00007.mrc","2":"micrographs/micrograph00007.mrc"}
+    micrographsdic = {}
     n=3
     print micrographs
     for i in micrographs:
@@ -212,7 +212,7 @@ def run_game():
     1) Beginner
     2) Advanced'''
     for i in keys:
-        print'\t{0}\t{1}'.format(i,micrographsdic[i])
+        print'\t{0}) {1}'.format(i,micrographsdic[i])
     diff = raw_input('Choose difficulty level:')
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
