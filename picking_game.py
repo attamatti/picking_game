@@ -200,10 +200,12 @@ def run_game():
 
     micrographs = glob.glob('micrographs/*.mrc')
     micrographsdic = {}
+    micrographsbackdic = {}
     n=3
     for i in micrographs:
         if i not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
-            micrographsdic[i] = n 
+            micrographsdic[i] = n
+            micrographsbackdic[n] = i
             n+=1
     keys = micrographsdic.keys()
     keys.sort
@@ -215,7 +217,7 @@ def run_game():
     diff = raw_input('\nChoose difficulty level:')
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
-    file = micrographsdic[diff]
+    file = micrographsbackdic[int(diff)]
     thegame(file)
     os.system('rm micrographs/*_manualpick.star')
     reset = raw_input('\n Thanks for playing!')
