@@ -2,6 +2,7 @@
 import os
 import sys
 import time
+import grep
 global vers
 global relionpath
 relionpath = '/fbs/emsoftware2/LINUX/relion-1.4-beta-1/bin/'
@@ -197,13 +198,24 @@ def run_game():
     check_scores()
     print '\n\nParticle picking demo | for astbury conversation | vers {0}'.format(vers)
 
-    
-    
+    micrographs = grep('micrographs/*.mrc')
+    micrographsdic = {"1":"micrographs/micrograph00007.mrc","2":"micrographs/micrograph00007.mrc"}
+    n=3
+    for i in micrographs:
+        if i not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
+            micrographskdic[n] = i
+            n+=1
+    keys = micrographsdic.keys()
+    keys.sort
     print '''
     1) Beginner
     2) Advanced
     '''
+    for i in keys:
+        print'{0}/t{1}'.format(i,micrograpshdic[i])
     diff = raw_input('Choose difficulty level:')
+    
+    
     
     if diff == '1':
         file = 'micrographs/micrograph00007.mrc'
