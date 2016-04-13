@@ -201,7 +201,6 @@ def run_game():
     micrographs = glob.glob('micrographs/*.mrc')
     micrographsdic = {}
     n=3
-    print micrographs
     for i in micrographs:
         if i not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
             micrographsdic[n] = micrographs[i]
