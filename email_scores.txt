@@ -1,27 +1,6 @@
-Matt I	fbsmi@leeds.ac.uk	1	0
-Ethan		35	1
-Grace		12	1
-Hugh S		13	0
-Dan H		35	0
-colin		12	6
-paul v		13	1
-		13	4
-katie		24	3
-Frank	xxx@leeds.ac.uk	12	4
-		12	1
-Alan	xxxx@googlemail.com	13	0
-Tilly	xxxx@googlemail.com	32	2
-rob k	xxxx@hotnail.com	33	2
-		16	1
-Roland		31	2
-Harriet	xxxx@leeds.ac.uk	38	4
-Iain		35	0
-NEIL R		38	0
-Emma H		40	1
-Becky		42	0
-robin		38	10
-Kevin		26	0
-Anna H		36	2
-Adam		30	1
-Alan R		36	0
-Donald J. Trum -6295   0
+Matt,fbsmi@leeds.ac.uk,4,4
+,,7,5
+Donald J. Trump,,2,88
+Han Durdiss,Yeah right!,13,0
+Bob,bob@bob.com,8,0
+Neil R,,19,1
