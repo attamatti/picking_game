@@ -211,13 +211,12 @@ def run_game():
     1) Beginner
     2) Advanced'''
     for i in keys:
-        print'     {1}) {0}'.format(i,micrographsdic[i])
-    diff = raw_input('Choose difficulty level:')
+        print'    {1}) {0}'.format(i,micrographsdic[i])
+    diff = raw_input('\nChoose difficulty level:')
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
     file = micrographsdic[diff]
     thegame(file)
-    #os.system('python picking-demo.py {0}'.format(file))
     os.system('rm micrographs/*_manualpick.star')
     reset = raw_input('\n Thanks for playing!')
     os.system('pkill relion')
