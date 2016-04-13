@@ -203,7 +203,7 @@ def run_game():
     n=3
     for i in micrographs:
         if i not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
-            micrographsdic[n] = micrographs[int(i)]
+            micrographsdic[i] = n 
             n+=1
     keys = micrographsdic.keys()
     keys.sort
@@ -211,7 +211,7 @@ def run_game():
     1) Beginner
     2) Advanced'''
     for i in keys:
-        print'\t{0}) {1}'.format(i,micrographsdic[i])
+        print'\t{1}) {0}'.format(i,micrographsdic[i])
     diff = raw_input('Choose difficulty level:')
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
