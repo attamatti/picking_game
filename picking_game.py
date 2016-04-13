@@ -202,7 +202,7 @@ def run_game():
     micrographsdic = {"1":"micrographs/micrograph00007.mrc","2":"micrographs/micrograph00007.mrc"}
     n=3
     for i in micrographs:
-        if micrographsdic[i] not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
+        if i not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
             micrographsdic[n] = micrographs[i]
             n+=1
     keys = micrographsdic.keys()
