@@ -212,7 +212,7 @@ def run_game():
     2) Advanced
     '''
     for i in keys:
-        print'{0}/t{1}'.format(i,micrograpshdic[i])
+        print'{0}/t{1}'.format(i,micrographsdic[i])
     diff = raw_input('Choose difficulty level:')
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
