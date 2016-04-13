@@ -202,8 +202,8 @@ def run_game():
     micrographsdic = {"1":"micrographs/micrograph00007.mrc","2":"micrographs/micrograph00007.mrc"}
     n=3
     for i in micrographs:
-        if i not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
-            micrographsdic[n] = i
+        if micrographsdic[i] not in("micrographs/micrograph00007.mrc","micrographs/micrograph00002.mrc"):
+            micrographsdic[n] = micrographs[i]
             n+=1
     keys = micrographsdic.keys()
     keys.sort
@@ -215,7 +215,7 @@ def run_game():
     diff = raw_input('Choose difficulty level:')
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
-    file = micrographsd[diff]
+    file = micrographsdic[diff]
     thegame(file)
     #os.system('python picking-demo.py {0}'.format(file))
     os.system('rm micrographs/*_manualpick.star')
