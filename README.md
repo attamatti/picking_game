@@ -8,6 +8,6 @@ The game requires a working copy of relion 1.4.  It will look for the hardcoded 
 
 to add your own micrographs:
 - put the micrograph in the micrographs folder
-- use relion to pick particles to make the answer, save the star as micrographs/<filename>_answers.star
+- use relion to pick particles to make the answer, save the star as `micrographs/<filename>_answers.star`
 
 
