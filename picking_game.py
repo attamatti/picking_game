@@ -208,7 +208,7 @@ def run_game():
             micrographsbackdic[n] = i
             n+=1
     keys = micrographsdic.keys()
-    keys.sort(reverse=true)
+    keys.sort(reverse=True)
     print '''
     1) Beginner
     2) Advanced'''
