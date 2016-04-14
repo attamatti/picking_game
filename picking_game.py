@@ -218,7 +218,7 @@ def run_game():
     if diff == 's':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
     file = micrographsbackdic[int(diff)]
-    if os.path.isfile('{0}_answers.mrc'.format(file.split('.')[0])) == False:
+    if os.path.isfile('{0}_answers.star'.format(file.split('.')[0])) == False:
         sys.exit('The answer file for this micrograph is missing\nmake it with relion and save as micrographs/<filename>_answers.star')
     thegame(file)
     os.system('rm micrographs/*_manualpick.star')
