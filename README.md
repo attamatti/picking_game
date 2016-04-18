@@ -12,9 +12,9 @@ To add your own micrographs:
 
 Scoring:
 The program compares the results of the picking with the answer starfile.
-    - Any particle that doesn't have a picked particle within 1/3 of a particle diameter counts as a miss
-    - If a particle has two or more picks within 1/3 of a particle diameter all of the picks are considered false positives
-    - Any pick not with 1/3 of a particle diameter of a correct pick is considered a false positive
+- Any particle that doesn't have a picked particle within 1/3 of a particle diameter counts as a miss
+- If a particle has two or more picks within 1/3 of a particle diameter all of the picks are considered false positives
+- Any pick not with 1/3 of a particle diameter of a correct pick is considered a false positive
 Score  = Correct picks - false positives - misses
 
 leaderboard.py can be opened in a separate terminal window to display an independent leaderboard - useful for public engagement events and the like.  Hit enter to update it.
