@@ -5,7 +5,7 @@ import os
 
 def check_scores(number):
     os.system('clear')  
-    print "** Particle Picking Leaderboard **"
+    print "** Particle Picking Top {0} Leaderboard **".format(num)
     print '\n    NAME                                    SCORE'
     scoresdata = open('email_scores.txt','r').readlines()
     
