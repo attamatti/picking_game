@@ -5,8 +5,7 @@ import os
 
 def check_scores(number):
     os.system('clear')  
-    print "** Particle Picking Top {0} Leaderboard **".format(num)
-    print '\n    NAME                                    SCORE'
+
     scoresdata = open('email_scores.txt','r').readlines()
     
     scores = {}
@@ -24,6 +23,8 @@ def check_scores(number):
         listlength = len(keys)
     else:
         listlength = number
+    print "** Particle Picking Top {0} Leaderboard **".format(listlength)
+    print '\n    NAME                                    SCORE'
     
     for i in keys[0:listlength]:
         if i < curr:
