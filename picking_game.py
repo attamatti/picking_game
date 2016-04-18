@@ -206,6 +206,7 @@ def run_game(micsdata):
     global scale
     os.system('clear')
     print '\n** Particle picking trainer vers {0} **'.format(vers)
+    print 'micrographs scale: {0}\n'.format(scale)
     n = 1
     backdic = {}
     for i in micsdata:
