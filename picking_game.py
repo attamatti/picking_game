@@ -12,7 +12,7 @@ relionpath = '/fbs/emsoftware2/LINUX/relion-1.4-beta-1/bin/'
 
 #--- no touchy touchy anything below here ---------------------
 
-vers = '0.2'
+vers = '0.2 - BETA test'
 
 # --- function find relion ---
 def find_relion():
