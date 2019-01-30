@@ -11,10 +11,10 @@ def check_scores(number):
     scores = {}
     for i in scoresdata:
         splitdata = i.split(',')
-        if int(splitdata[2])-int(splitdata[3]) in scores:
-            scores[int(splitdata[2])-int(splitdata[3])].append(splitdata[0])
+        if int(splitdata[1])-int(splitdata[2]) in scores:
+            scores[int(splitdata[1])-int(splitdata[2])].append((splitdata[0],splitdata[3].replace('\n','')))
         else:
-            scores[int(splitdata[2])-int(splitdata[3])] = [splitdata[0]] 
+            scores[int(splitdata[1])-int(splitdata[2])] = [(splitdata[0],splitdata[3].replace('\n',''))]
     keys = scores.keys()
     keys.sort(reverse=True)
     n = 1
@@ -24,14 +24,14 @@ def check_scores(number):
     else:
         listlength = number
     print "** Particle Picking Top {0} Leaderboard **".format(listlength)
-    print '\n    NAME                                    SCORE'
+    print '\n    NAME                                      SCORE       TIME'
     
     for i in keys[0:listlength]:
         if i < curr:
             n +=1
     	m=0
         for j in scores[i]:
-            print '{0:>2}) {1:<40} {2:>3}'.format(n,scores[i][m],i) 
+            print '{0:>2}) {1:<40} {2:>6}       {3:>5}'.format(n,scores[i][m][0],i,':'.join(scores[i][m][1].split('.')[0].split(':')[1:3])) 
             m+=1
             curr = i
     wait = raw_input('')
