@@ -5,14 +5,15 @@ import time
 import glob
 global vers
 global relionpath
+import datetime
 ########### enter the path to relion here###################
-relionpath = '/fbs/emsoftware2/LINUX/relion-1.4-beta-1/bin/'
+relionpath = '/fbs/emsoftware2/LINUX/fbscem/relion3/relion-3.0_beta/build/bin/'
 ############################################################
 
 
 #--- no touchy touchy anything below here ---------------------
 
-vers = '0.2 - BETA test'
+vers = '1.3.0'
 
 # --- function find relion ---
 def find_relion():
@@ -27,17 +28,22 @@ def find_relion():
 #--------- check the scores and make the leaderboard
 def check_scores():  
     print "** **** ****** Particle Picking Leaderboard ****** **** **"
-    print '      NAME                                    SCORE'
-    scoresdata = open('email_scores.txt','r').readlines()
-    
+    print '      NAME                                    SCORE      TIME'
+    try:
+    	scoresdata = open('email_scores.txt','r').readlines()
+    except:
+	print('No scores recorded yet...')
+	print "** **** *****                             ****** **** **"
+	print 'press <enter> to go back'
+    	return()
     scores = {}
     for i in scoresdata:
         splitdata = i.split(',')
         if len(splitdata) >= 1:
-            if int(splitdata[-2])-int(splitdata[-1]) in scores:
-                    scores[int(splitdata[-2])-int(splitdata[-1])].append(splitdata[0])
+            if int(splitdata[1])-int(splitdata[2]) in scores:
+                    scores[int(splitdata[1])-int(splitdata[2])].append((splitdata[0],splitdata[3].strip('\n').split('.')[0].split(':')[-2:]))
             else:
-                  scores[int(splitdata[-2])-int(splitdata[-1])] = [splitdata[0]] 
+                  scores[int(splitdata[1])-int(splitdata[2])] = [(splitdata[0],splitdata[3].strip('\n').split('.')[0].split(':')[-2:])] 
     keys = scores.keys()
     keys.sort(reverse=True)
     n = 1
@@ -47,7 +53,7 @@ def check_scores():
             n +=1
         m=0
         for j in scores[i]:
-            print '{0:>2}) {1:<40} {2:>3}'.format(n,scores[i][m],i) 
+            print '{0:>2}) {1:<40} {2:>4}      {3:>3}:{4}'.format(n,scores[i][m][0],i,scores[i][m][1][0],scores[i][m][1][1]) 
             m+=1
         curr = i
     print "** **** *****                             ****** **** **"
@@ -77,9 +83,12 @@ def thegame(file,partdiameter,scale,apix):
     # ---- function: get coords from a star file
     def getcoords(file):
         coords = []
+        if os.path.isfile(file) == False:
+            check = raw_input('Right click and select "save STAR with coordinates" before continuing')
+            getcoords(file)
         data = open(file,'r').readlines()
         for line in data:
-                if '_' not in line and line != '\n':
+                if '_' not in line and line != '\n' and '#' not in line:
                     if len(line.split()) >1:
                         coords.append(line.split())
         return coords
@@ -87,6 +96,8 @@ def thegame(file,partdiameter,scale,apix):
     
     #----- function: run relion to do the picking:
     def do_picking(file):
+        global start_time
+        os.system('clear')
         print """
     How to pick particles:
     
@@ -97,16 +108,17 @@ def thegame(file,partdiameter,scale,apix):
         go = raw_input('Press <enter> to begin')
     
         print '... please wait for the micrograph to load\n'
+        start_time = datetime.datetime.now()
         command = '{2}relion_display --pick  --i {0}  --coords {1}_manualpick.star --scale {4} --black 0 --white 0 --sigma_contrast 3 --particle_radius {3} --lowpass 10 --angpix {5} &'.format(file,file.split('.')[0],relionpath,0.75*partdiameter,scale,apix)
         os.system(command)
-        time.sleep(10)
-        go = raw_input('\nClick on this window and hit <enter> when finished')
+        time.sleep(5)
+        go = raw_input('\nClick on this window and hit <enter> when finished\n')
     #---------------------------------------------
     
     
     #-- Function compare autopick and manual pick files generate starfiles for pretty visuals ---
     def diffstar(apf,mpf,fileroot):
-        maxbetween = 0.3*partdiameter
+        maxbetween = 0.7*partdiameter
         colorcode = open('{0}_colors.star'.format(fileroot),'w')
         autopick = getcoords(apf)
         manualpick = getcoords(mpf)
@@ -149,7 +161,7 @@ def thegame(file,partdiameter,scale,apix):
                 x = i.split(',')[0]
                 y = i.split(',')[1]
                 colorcode.write('{0}\t{1}\t2\n'.format(x,y))
-                misses +=1
+                misses += 1
             if hits[i] == 1:
                 x = i.split(',')[0]
                 y = i.split(',')[1]
@@ -159,7 +171,7 @@ def thegame(file,partdiameter,scale,apix):
                 x = i.split(',')[0]
                 y = i.split(',')[1]
                 colorcode.write('{0}\t{1}\t2\n'.format(x,y))
-                misses += 1
+                misses +=1
         for i in poshits:
             if poshits[i] == 0:
                 x = i.split(',')[0]
@@ -188,17 +200,17 @@ def thegame(file,partdiameter,scale,apix):
     print ''
     print "**************************************************"
     print "You picked {0}/{1} good particles with {2} errors!".format(goodhits,manpi,falsepositives)
-    print 'purple = hits'
-    print 'red = misses'
-    print 'blue = false positives'
+    print 'Hits                +{0}    Purple'.format(goodhits)
+    print 'Misses              -{0}    Red'.format(misses) 
+    print 'False positives     -{0}    Blue'.format(falsepositives)
+    print '\nTime: {0}'.format(datetime.datetime.now()-start_time)     
     print '**************************************************'
-    print 'Final Score: {0}                                  '.format(int(goodhits)-int(falsepositives))
+    print 'Final Score: {0}                                  '.format(int(goodhits)-int(falsepositives)-int(misses))
     print '**************************************************'
     
     name = raw_input('Enter your name to record your score: ')
     if len(name) >= 1: 
-        email = raw_input('Enter your Email address to enter the contest: ')
-        emailsfile.write('{0},{1},{2},{3}\n'.format(name,email,goodhits,falsepositives))
+        emailsfile.write('{0},{1},{2},{3}\n'.format(name,goodhits,falsepositives,str(datetime.datetime.now()-start_time)))
     return()
 
 #-------- run the game ----------------------
@@ -213,7 +225,7 @@ def run_game(micsdata):
         print '{0}) {1}'.format(n,micsdata[i][0]) 
         backdic[str(n)] = i
         n+=1
-    print '\ns) set scale\tc) check your answers\th) view high scores\tq) quit'
+    print '\ns) set scale\tc) check your answers\th) view high scores\t x) clear highscores \t q) quit'
     diff = raw_input("Select the micrograph to pick: ")
     if diff == 'shaun':
         sys.exit('\n**SHAUN MODE! -- you just won by cheating**\n')
@@ -229,6 +241,15 @@ def run_game(micsdata):
         run_game(micsdata)
     if diff == 'c':
         check_results()
+    if diff == 'x':
+    	try:
+    		os.system('rm email_scores.txt')
+	except:
+		pass
+	os.system('clear')
+	print('High scores cleared\n')
+	wait = raw_input('press <enter> to return')
+	run_game(micsdata)
     file = backdic[diff]
     apix = micsdata[file][1]
     partdiameter = micsdata[file][2]
@@ -266,7 +287,7 @@ def check_results():
     selval = '{0}.mrc'.format(micsanswers[int(selection)])
     partdiameter = float(micrographs['{0}.mrc'.format(micsanswers[int(selection)])][2])
     command = '{2}relion_display --pick  --i {0}  --coords {1}_colors.star --scale 0.2 --black 0 --white 0 --sigma_contrast 3 --particle_radius {3} --lowpass 10 --angpix 1 --color_label rlnClassNumber --blue 0 --red 2 &'.format(selval,micsanswers[int(selection)],relionpath,0.75*partdiameter)
-    time.sleep(15)
+    time.sleep(5)
     os.system(command)
     check_results()
 #-----------------------------------        
