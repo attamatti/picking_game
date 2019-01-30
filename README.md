@@ -1,9 +1,9 @@
 # picking_game
-The game requires a working copy of relion 1.4.  It will look for the hardcoded path in line 8, change this to the correct path, if it doesn't find relion there it will ask for the location every time.
+The game requires a working copy of relion any version 1.4+ should work.  It will look for the hardcoded path in line 8, change this to the correct path, if it doesn't find relion there it will ask for the location every time.
 - after starting the game select the micrograph to work on
 - pick the particles on the micrograph that appears, right click and save the star file
 - hit enter on the window running this program to display the score and display the diagnostic
-- enter you name and email (optional) to get all the glory on the leader board
+- enter you name and to get all the glory on the leader board
 
 To add your own micrographs:
 - put the micrograph in the micrographs folder
@@ -18,3 +18,7 @@ The program compares the results of the picking with the answer starfile.
 Score  = Correct picks - false positives - misses
 
 leaderboard.py can be opened in a separate terminal window to display an independent leaderboard - useful for public engagement events and the like.  Hit enter to update it.
+
+option c ('check you answers') displays the diagnostic screen for the last time a specific file was picked, very useful if the program has crashed before someone gost to see their score.
+
+If you are Shaun Rawson and prefer to win by cheating type 'shaun'.
