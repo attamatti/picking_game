@@ -1,6 +1,5 @@
-Matt,fbsmi@leeds.ac.uk,4,4
-Some guy,,7,5
-Donald J. Trump,,2,88
-Han Durdiss,Yeah right!,13,0
-Bob,bob@bob.com,8,0
-Neil R,,19,1
+Matt I,13,0,0:00:35.513023
+Han Durdiss,41,5,0:01:45.731493
+Donald J. Trump, -15254,0,0:00:31.731493
+Bob,15,14,0:04:34.731493
+Bill Astbury,103,10,0:05:24.731493
